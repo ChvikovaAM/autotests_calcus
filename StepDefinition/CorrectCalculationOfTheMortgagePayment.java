@@ -15,9 +15,7 @@ import src.IMortgageCalculation;
 import src.IRandomGenerator;
 import src.MortgageCalculation;
 import src.RandomGenerator;
-
 import java.text.DecimalFormat;
-import java.util.Random;
 
 public class CorrectCalculationOfTheMortgagePayment {
     private String driverPath = "D:\\Chvikova_qa\\chromedriver.exe";
@@ -27,6 +25,7 @@ public class CorrectCalculationOfTheMortgagePayment {
     private int age = 20;
     private int randomPercent;
     private IMortgageCalculation mortgageCalculation = new MortgageCalculation();
+    private IRandomGenerator randomGenerator = new RandomGenerator();
 
     public CorrectCalculationOfTheMortgagePayment() //конструктор
     {
@@ -73,7 +72,6 @@ public class CorrectCalculationOfTheMortgagePayment {
         browser.findElement(By.xpath("//input[@name='period']")).sendKeys(String.valueOf(age));
 
         //Генерация числа от 5 до 12 и вставка его в Процентную ставку
-        IRandomGenerator randomGenerator = new RandomGenerator();
         randomPercent = randomGenerator.generate(5, 12);
         browser.findElement(By.xpath("//input[@name='percent']")).sendKeys(String.valueOf(randomPercent));
 
