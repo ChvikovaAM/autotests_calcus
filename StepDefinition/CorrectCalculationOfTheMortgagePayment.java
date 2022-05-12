@@ -12,7 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import src.IMortgageCalculation;
+import src.IRandomGenerator;
 import src.MortgageCalculation;
+import src.RandomGenerator;
 
 import java.text.DecimalFormat;
 import java.util.Random;
@@ -23,7 +25,6 @@ public class CorrectCalculationOfTheMortgagePayment {
     private WebDriver browser;
     private long sum = 9600000;
     private int age = 20;
-    private Random random = new Random();
     private int randomPercent;
     private IMortgageCalculation mortgageCalculation = new MortgageCalculation();
 
@@ -72,9 +73,9 @@ public class CorrectCalculationOfTheMortgagePayment {
         browser.findElement(By.xpath("//input[@name='period']")).sendKeys(String.valueOf(age));
 
         //Генерация числа от 5 до 12 и вставка его в Процентную ставку
-        randomPercent = random.nextInt(8) + 5;
+        IRandomGenerator randomGenerator = new RandomGenerator();
+        randomPercent = randomGenerator.generate(5, 12);
         browser.findElement(By.xpath("//input[@name='percent']")).sendKeys(String.valueOf(randomPercent));
-        //browser.findElement(By.xpath("//input[@name='percent']")).sendKeys("3");
 
         //Радиобаттон Аннуитетные
         if (!browser.findElement(By.xpath("//input[@id='payment-type-1']")).isSelected()
